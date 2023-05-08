@@ -10,7 +10,7 @@
   }
   
   .inputField {
-    @apply w-full p-2 sm:p-2.5 rounded-md border-b-2 border-teal-300 outline-none focus:border-zinc-400
+    @apply w-full p-2 sm:p-2.5 border-b-2 border-teal-300 outline-none focus:border-zinc-400
   }
 
   button {
