@@ -3,7 +3,16 @@ import Pagination from "./Pagination";
 import CardOffer from "./items/CardOffer";
 
 
-const CardSection = ({datas, docsCount, pageLimit, gotoNextPage, gotoPrevPage }) => {
+const CardSection = ({
+  datas, 
+  docsCount, 
+  pageLimit,
+  currentPage,
+  gotoNextPage, 
+  gotoPrevPage 
+}) => {
+
+  const totalPage = Math.ceil(datas.count / pageLimit);
   
   return (
     <>
@@ -11,7 +20,9 @@ const CardSection = ({datas, docsCount, pageLimit, gotoNextPage, gotoPrevPage })
       <div className="flex gap-4 items-center justify-center md:justify-end ">
         <p>{`Total nombre d'offres: ${datas.count}`}</p>
         <span> | </span>
-        <p className="text-zinc-500">{`Resultats sur la page: ${datas.offers.length} `}</p>
+        <p className="text-zinc-500">{`Resultat sur la page: ${datas.offers.length} `}</p>
+        <span> | </span>
+        <p className="text-zinc-500">{`Page: ${currentPage} sur ${totalPage}`}</p>
         <Pagination 
           docsCount={docsCount}
           pageLimit={pageLimit}  
