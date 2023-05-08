@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Pagination from "./Pagination";
-import CardOffer from "./items/Cardoffer";
+import CardOffer from "./items/CardOffer";
 
 
 const CardSection = ({datas, docsCount, pageLimit, gotoNextPage, gotoPrevPage }) => {
