@@ -43,7 +43,7 @@ const Login = ({handleToken, visible, setVisible}) => {
   return (
 
     <fieldset className={`container h-full ${!visible? "mt-[8.5rem] mb-16" : ""}`}>
-      <legend className="text-2xl text-center">Se connecter</legend>
+      <legend className="text-2xl mx-auto">Se connecter</legend>
       <form
         className="flex flex-col gap-5 justify-center items-center w-[85%] h-[25rem] sm:max-w-xs mx-auto"
         onSubmit={submitLogin}

@@ -88,7 +88,7 @@ const ResetPassword = () => {
 
   return (
     <fieldset className="container h-full mt-[6.5rem]">
-        <legend className="text-2xl text-center">Reinitialisation mot de passe</legend>
+        <legend className="text-2xl mx-auto">Reinitialisation mot de passe</legend>
         <form
         className="flex flex-col gap-5 justify-center items-center w-[85%] h-[25rem] sm:max-w-xs mx-auto"
           onSubmit={submitResetPassword}
