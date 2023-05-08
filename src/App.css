@@ -1,0 +1,103 @@
+.bg-hero {
+    background-image: url(/images/herovinted.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    height: 0; 
+    padding-top: 66.64%; 
+}
+@media(min-width: 768px) {
+    .bg-hero {
+        background-size: cover;
+        background-position: 50%;
+        height: 455px;
+        padding-top: unset; 
+    }    
+}
+.hero-ready1 {
+    display: none;
+}
+@media(min-width: 640px) {
+    .hero-ready1 {
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 0 2px hsla(0,0%,7%,.24);
+        display: flex;
+        flex-direction: column;
+        font-size: 34px;
+        height: 220px;
+        justify-content: center;
+        padding: 25px;
+        position: absolute;
+        top: 75px;
+        left: 5%;
+        width: 360px;
+    }
+}
+
+.card-offer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+    gap: 1.5rem;
+    height: 100%;
+}
+#load .card-offer {
+    height: 800px;
+}
+.detail span  {
+    flex: 1 1;
+}
+
+label {
+    width: 100%;
+}
+fieldset button {
+    width: 100%;
+    height: 2.5rem;
+}
+.warn input {
+    border-bottom: 2px solid #f87171;
+}
+.chevron {
+    width: 2.5rem;
+    background-color: #017b86;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0.5;
+}
+.chevron  img {
+    width: 2rem;
+}
+.active {
+    pointer-events: unset;
+    opacity: 1;
+}
+.ph-load {
+    height: 85%;
+}
+
+/* Css Modal... */
+
+.modal-root {
+    position: absolute;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+.modal {
+    background-color: white;
+    width: 600px;
+    height: 300px;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+  }

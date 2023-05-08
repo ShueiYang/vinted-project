@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .container {
+    max-width: 1280px;
+    margin: auto;
+  }
+  
+  .inputField {
+    @apply w-full p-2 sm:p-2.5 rounded-md border-b-2 border-teal-300 outline-none focus:border-zinc-400
+  }
+
+  button {
+    border: 1px solid #017b86;
+    border-radius: 5px;
+    font-size: 12px;
+    height: 30px;
+    outline: none;
+    width: 115px;
+  }
+  header input {
+    background-color: #f5f6f7;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    height: 37px;
+    outline: none;
+    padding-left: 2.25rem;
+  }
+  .searchbar img {
+    position: absolute;
+    width: 16px;
+    left: 10px;
+    top: 10px
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100vw;
+  position: relative;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+}
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+}
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
