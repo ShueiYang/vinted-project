@@ -87,7 +87,7 @@ function App() {
         <Route path="*" element={<Navigate replace to="/404" />} />                    
         <Route element={<PrivateRoutes user={user} token={token} />}>   
           <Route path="/publish" element={<Publish token={token} />} />
-          <Route path="/user" element={<Profile token={token} />} />
+          <Route path="/user" element={<Profile token={token} user={user}/>} />
           <Route path="/payment" element={
             <Elements stripe={stripePromise}>
               <Payment token={token} user={user}/>

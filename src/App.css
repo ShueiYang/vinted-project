@@ -139,3 +139,13 @@ fieldset button {
     padding: 2rem 3rem;
     border-radius: 12px;
   }
+/*  preparation for css not used */
+
+.sold {
+   position: absolute;
+   font-size: 24px;
+   font-weight: bold;
+   top: 20%;
+   right: 20%; 
+   background-color: white;
+}

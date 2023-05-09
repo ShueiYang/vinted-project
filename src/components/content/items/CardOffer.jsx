@@ -11,7 +11,7 @@ const CardOffer = ({offer}) => {
   } = offer;
 
   return (
-    <Link to={`/offer/${offer._id}`}>
+    <Link to={`/offer/${offer._id}`} className="relative" >
       <div className="flex flex-col w-full h-auto"> 
         <div className="flex items-center justify-center gap-2 p-2 text-xs ">
           <img className="w-6 h-6 rounded-full" src={owner.account.avatar ? owner.account.avatar.secure_url : "/icons/account.svg"} alt="avatar" />
@@ -34,6 +34,9 @@ const CardOffer = ({offer}) => {
           </div>
         </div>
       </div>
+      {/* <div className="sold">
+           <p>Vente en cours</p>
+      </div> */}
     </Link>
   );
 };
