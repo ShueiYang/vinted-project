@@ -8,7 +8,7 @@ import usePage from "../hooks/usePage";
 
 const pageLimit = 15;
 
-const Home = ({input}) => {
+const Home = ({search}) => {
 
   const [ data, setData ] = useState([]);
   const [ isLoading, setLoading ] = useState(true);
@@ -25,7 +25,7 @@ const Home = ({input}) => {
         page: currentPage,
         priceMin: priceRange.priceMin,
         priceMax: priceRange.priceMax,
-        title: input 
+        title: search
     })
     const apiUrl = `${import.meta.env.VITE_API_URL}/offers?${params.toString()}`
 
@@ -42,9 +42,9 @@ const Home = ({input}) => {
       }
     }
     fetchData();
-  }, [currentPage, sort, input, priceRange]);
+  }, [currentPage, sort, search, priceRange]);
 
-
+  
   const { gotoNextPage, gotoPrevPage } = usePage(setCurrentPage, count, setCount, data);
 
   return (
@@ -59,6 +59,7 @@ const Home = ({input}) => {
           datas={data}
           docsCount={count}
           pageLimit={pageLimit}
+          currentPage={currentPage}
           gotoNextPage={gotoNextPage}
           gotoPrevPage={gotoPrevPage}
         />

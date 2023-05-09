@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const Navbar = ({ token, handleToken, setInput, user }) => {
+const Navbar = ({ token, handleToken, setSearch, user }) => {
 
   const avatar = user?.account?.avatar?.secure_url;
 
@@ -16,7 +16,7 @@ const Navbar = ({ token, handleToken, setInput, user }) => {
           type="text"
           placeholder="Recherche des articles" 
           onChange={(e)=> {
-            setInput(e.target.value)
+            setSearch(e.target.value)
           }}
         />
         <img src="/icons/search.svg" alt="search" />

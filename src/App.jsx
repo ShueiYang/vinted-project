@@ -8,12 +8,13 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import { useEffect, useState } from "react";
 import PrivateRoutes from "./components/PrivateRoutes";
-import PublishOffer from "./pages/PublishOffer";
+import Publish from "./pages/Publish";
 import Profile from "./pages/Profile";
 import NotFoundPage from "./pages/404";
 import Footer from "./components/footer/Footer";
 import Modal from "./components/Modal";
 import ResetPassword from "./pages/ResetPassword";
+import useSearchDebounce from "./hooks/useSearchDebounce";
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
   const [ token, setToken ] = useState(Cookies.get("vintedToken" || null));
   const [ user, setUser ] = useState(null);
   const [ visible, setVisible ] = useState(false);
-  const [ input, setInput ] = useState("");
+  // custom  search debounce
+  const [ search, setSearch ] = useSearchDebounce();
 
   
   useEffect(()=> {
@@ -67,12 +69,12 @@ function App() {
         token={token}
         handleToken={handleToken}
         user={user}
-        setInput={setInput}
+        setSearch={setSearch}
         // visible={visible}
         // setVisible={setVisible}
       />   
       <Routes>
-        <Route path="/" element={<Home input={input}/>} />
+        <Route path="/" element={<Home search={search}/>} />
         <Route  path="/login" element={<Login handleToken={handleToken} visible={visible} setVisible={setVisible} />} />
         <Route  path="/signup" element={<SignUp handleToken={handleToken} />} />
         <Route path="/offer/:id" element={<Offer />}/> 
@@ -80,8 +82,8 @@ function App() {
         <Route path="/reset-password" element={ <ResetPassword />} />  
         <Route path="*" element={<Navigate replace to="/404" />} />                    
         <Route element={<PrivateRoutes user={user} token={token} />}>   
-          <Route path="/publish" element={<PublishOffer />} />
-          <Route path="/user" element={<Profile />} />
+          <Route path="/publish" element={<Publish token={token} />} />
+          <Route path="/user" element={<Profile token={token} />} />
         </Route>
       </Routes>   
 
