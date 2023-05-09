@@ -14,7 +14,9 @@ function useSearchDebounce(delay = 350) {
       return () => clearTimeout(delayFn);
 
     }, [searchQuery, delay]);
-  
+  // Search is the real state which will trigger the rerender, and this state
+  // is trigger by a second state searchQuery delay by setTimeout 350 ms.
+  // and Searchquery is the state listening on the searchbar.
     return [search, setSearchQuery];
 }
 
