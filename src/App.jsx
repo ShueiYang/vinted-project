@@ -15,6 +15,9 @@ import Footer from "./components/footer/Footer";
 import Modal from "./components/Modal";
 import ResetPassword from "./pages/ResetPassword";
 import useSearchDebounce from "./hooks/useSearchDebounce";
+import Payment from "./pages/Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
   // custom  search debounce
   const [ search, setSearch ] = useSearchDebounce();
 
+  const stripePromise = loadStripe(
+    "pk_test_51N5rJgBVBg8h4b2rCeRDB0kIpG7xNLkmsEsWxc6z3kjkJIhhjUAntaeTYovKLSpohoriSMKvrdr10pXfZ96RnVk400klEweLkG"
+  )
   
   useEffect(()=> {
     async function fetchUser() {
@@ -70,8 +76,6 @@ function App() {
         handleToken={handleToken}
         user={user}
         setSearch={setSearch}
-        // visible={visible}
-        // setVisible={setVisible}
       />   
       <Routes>
         <Route path="/" element={<Home search={search}/>} />
@@ -84,6 +88,11 @@ function App() {
         <Route element={<PrivateRoutes user={user} token={token} />}>   
           <Route path="/publish" element={<Publish token={token} />} />
           <Route path="/user" element={<Profile token={token} />} />
+          <Route path="/payment" element={
+            <Elements stripe={stripePromise}>
+              <Payment token={token} user={user}/>
+            </Elements>
+          } />
         </Route>
       </Routes>   
 

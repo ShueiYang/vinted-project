@@ -6,11 +6,13 @@
 @layer components {
   .container {
     max-width: 1280px;
-    margin: auto;
+    margin: 0px auto;
   }
-  
   .inputField {
     @apply w-full p-2 sm:p-2.5 border-b-2 border-teal-300 outline-none focus:border-zinc-400
+  }
+  .publishField {
+    @apply flex-1 h-full px-4 border-b-2 border-neutral-200 outline-none focus:border-zinc-400
   }
 
   button {
@@ -62,7 +64,6 @@ h3 {
 }
 h4 {
   font-size: 16px;
-  font-weight: bold;
 }
 a {
   font-weight: 500;

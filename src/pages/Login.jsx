@@ -48,7 +48,7 @@ const Login = ({handleToken, visible, setVisible}) => {
         className="flex flex-col gap-5 justify-center items-center w-[85%] h-[25rem] sm:max-w-xs mx-auto"
         onSubmit={submitLogin}
       >
-        <label htmlFor="email">
+        <label className={errorMessage ? "warn" : ""} htmlFor="email">
           <input
             className="inputField"
             id="email"
@@ -61,7 +61,7 @@ const Login = ({handleToken, visible, setVisible}) => {
           />
         </label>
 
-        <label htmlFor="password">
+        <label className={errorMessage ? "warn" : ""} htmlFor="password">
           <input
             className="inputField"
             id="password"

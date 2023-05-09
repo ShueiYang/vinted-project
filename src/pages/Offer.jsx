@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadPage from "../components/LoadPage";
 
 
@@ -87,10 +87,15 @@ const Offer = () => {
             <span>{owner.account.username}</span>
           </div>
         </div>
-
-        <button className="w-[80%] bg-[#017b86] text-slate-50 h-10 mt-8 mb-4 mx-auto">
-          Acheter
-        </button>
+        <Link 
+          to="/payment"
+          state={{title: product_name, price: product_price}} 
+          className="w-[80%] mx-auto"
+        >  
+          <button className="w-full bg-[#017b86] text-slate-50 h-10 mt-8 mb-4 mx-auto">
+            Acheter
+          </button>
+        </Link>  
       </div>    
     </article>
     </>
