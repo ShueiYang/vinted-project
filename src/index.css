@@ -33,6 +33,10 @@
     outline: none;
     padding-left: 2.25rem;
   }
+  header input:focus {
+    outline: none;
+  }
+  
   .searchbar img {
     position: absolute;
     width: 16px;

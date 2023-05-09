@@ -64,6 +64,8 @@ const Payment = ({ token, user }) => {
             <div className="min-h-[180px] p-4">
               <h3>Commande</h3>
               <p className="my-2">{`Nom: ${title}`}</p>
+              <p className="text-sm my-2">{`Frais protection acheteur`}</p>
+              <p className="text-sm my-2">{`Frais de port`}</p>
             </div>
 
             <div className="flex flex-col flex-1 p-6 border-t border-slate-300">
