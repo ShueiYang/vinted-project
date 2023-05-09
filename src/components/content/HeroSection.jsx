@@ -7,7 +7,7 @@ const HeroSection = () => {
     <div className="mt-[6.5rem]">
       <div className="bg-hero"> 
         <img 
-          className="absolute bottom-[14%] md:-bottom-2 right-0 pointer-events-none"
+          className="absolute bottom-[14%] md:-bottom-[2rem] right-0 pointer-events-none"
           src="/images/tear.svg"
           alt="tear paper"
         />

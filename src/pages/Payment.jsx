@@ -10,14 +10,15 @@ const Payment = ({ token, user }) => {
 
   const stripe = useStripe();
   const elements = useElements();
-
+ 
   async function handleSubmit(event) {
+
     event.preventDefault();
     try {
       setIsLoading(true);
       const cardElement = elements.getElement(CardElement);
       const stripeResponse = await stripe.createToken(cardElement, {
-        name: user.account._id
+        name: user._id
       });
       const stripeToken = stripeResponse.token.id;
       const backEndResponse = await fetch(

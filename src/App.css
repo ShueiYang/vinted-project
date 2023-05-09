@@ -11,7 +11,7 @@
     .bg-hero {
         background-size: cover;
         background-position: 50%;
-        height: 455px;
+        height: 560px;
         padding-top: unset; 
     }    
 }
@@ -33,6 +33,12 @@
         top: 75px;
         left: 5%;
         width: 360px;
+    }
+}
+@media(min-width: 1280px) {
+    .hero-ready1 {
+        height: 280px;
+        width: 380px;
     }
 }
 
