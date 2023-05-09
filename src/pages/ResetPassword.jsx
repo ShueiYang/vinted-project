@@ -35,7 +35,7 @@ const ResetPassword = () => {
         console.error(err);
       }
     }
- 
+    // will redirect to the homePage if no id or token on the query
     if(id && token) {
       accessResetForm();
     } else {

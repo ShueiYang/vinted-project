@@ -10,7 +10,7 @@ const SignUp = ({handleToken}) => {
     email: "",
     password: "",
     checkPassword: "",
-    newsletter: false,
+    newsletter: true,
   })
   const [ loading, setLoading ] = useState(false);
   const [ unMatch, setUnMatch ] = useState(false);
