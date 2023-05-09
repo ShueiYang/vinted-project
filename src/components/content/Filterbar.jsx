@@ -40,7 +40,7 @@ const FilterBar = ({setSort, setPriceRange}) => {
         <span className="text-sm ml-4">Prix entre :</span>
         <RangeSlider  setPriceRange={setPriceRange} />
       
-        <a href="https://github.com/ShueiYang/"
+        <a href="https://github.com/ShueiYang/vinted-project"
             className="hidden md:flex items-center mx-6"
             rel="noopener noreferrer"
             target="_blank"
