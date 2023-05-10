@@ -69,7 +69,7 @@ const Publish = ({token}) => {
           formData.append(key, value);
         }       
       })
-      console.log({formData});
+    
       const response = await fetch(`${import.meta.env.VITE_API_URL}/offer/publish`, {
         method: "POST",
       // not setting the content-type header with fetch

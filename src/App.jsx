@@ -61,7 +61,7 @@ function App() {
   function handleToken (token) {
     if(token) {
       setToken(token)
-      Cookies.set("vintedToken", token, {expires: 7});
+      Cookies.set("vintedToken", token, {expires: 7, sameSite: "Strict"});
     } else {
       setToken(null)
       setUser(null)
@@ -79,7 +79,15 @@ function App() {
       />   
       <Routes>
         <Route path="/" element={<Home search={search}/>} />
-        <Route  path="/login" element={<Login handleToken={handleToken} visible={visible} setVisible={setVisible} />} />
+        <Route  path="/login" element={
+          <Login 
+            token={token}
+            user={user}
+            handleToken={handleToken}
+            visible={visible}
+            setVisible={setVisible} 
+            />} 
+          />
         <Route  path="/signup" element={<SignUp handleToken={handleToken} />} />
         <Route path="/offer/:id" element={<Offer />}/> 
         <Route path="/404" element={ <NotFoundPage />} />  

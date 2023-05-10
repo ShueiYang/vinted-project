@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
-const Login = ({handleToken, visible, setVisible}) => {
+const Login = ({handleToken, visible, setVisible , token, user}) => {
 
   const navigate = useNavigate();
   const [ email, setEmail ] = useState("");
@@ -39,6 +39,9 @@ const Login = ({handleToken, visible, setVisible}) => {
     }
   }
 
+  if(token && user) {
+    return <Navigate to="/" />
+  }
 
   return (
 
