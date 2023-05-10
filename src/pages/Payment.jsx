@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
+
 const Payment = ({ token, user }) => {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
-  const [validate, setValidate] = useState(false);
+  //0 = no click yet,   1 = pending,  2 = ok, 3 = error  
+  const [ paymentStatus, setPaymentStatus ] = useState(0);
   const { title, price } = location.state;
 
   const stripe = useStripe();
@@ -15,7 +16,7 @@ const Payment = ({ token, user }) => {
 
     event.preventDefault();
     try {
-      setIsLoading(true);
+      setPaymentStatus(1);
       const cardElement = elements.getElement(CardElement);
       const stripeResponse = await stripe.createToken(cardElement, {
         name: user._id
@@ -37,18 +38,20 @@ const Payment = ({ token, user }) => {
         }
       );
       const result = await backEndResponse.json();
-      if (result === "succeeded") {
-        setIsLoading(false);
-        setValidate(true);
+      if (result === "succeeded") {   
+        setPaymentStatus(2)
+      } else {
+        setPaymentStatus(3)
       }
     } catch (err) {
+      setPaymentStatus(3)
       console.error(err);
-    }
+    } 
   }
 
   return (
     <div className="w-full h-full mt-[6.5rem] bg-slate-100">
-      {validate ? (
+      {paymentStatus === 2 ? (
         <div className="h-[400px] flex flex-col items-center justify-center">
           <h3>Le paiement a ete valide avec succes</h3>
           <Link to="/" className="mt-4">
@@ -74,13 +77,18 @@ const Payment = ({ token, user }) => {
                 <span className="my-2 font-bold">Total</span>
                 <span className="my-2 font-bold">{`${price}€`}</span>
               </div>
-              <CardElement />
+              <CardElement />          
               <button
-                className={`${isLoading ? "inactive" : ""}
+                className={`${paymentStatus === 1 ? "inactive" : ""}
                  w-[80%] bg-[#017b86] text-slate-50 text-xl h-10 mt-8 mb-4 mx-auto`}
               >
-                {isLoading ? "transaction en cours..." : "Payer"}
+                {paymentStatus === 1 ? "transaction en cours..." : "Payer"}
               </button>
+                { paymentStatus === 3 && 
+                  <p className="my-2 text-red-500 text-center">
+                    Une erreur est survenue, veuillez réessayer !
+                  </p> 
+                }
             </div>
           </div>
         </form>
