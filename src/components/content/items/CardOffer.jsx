@@ -5,6 +5,7 @@ const CardOffer = ({offer}) => {
   
   const {
     owner,
+    product_name,
     product_image,
     product_details,
     product_price
@@ -21,6 +22,7 @@ const CardOffer = ({offer}) => {
           <img className="w-full aspect-[0.6/1]" src={product_image.secure_url} alt="test" />
           <div className="flex flex-col p-2">
             <span>{`${product_price} €`}</span>
+            <span className="w-[90%] truncate">{product_name}</span>
             {
               product_details.map((detail, i) => {
                 return(
