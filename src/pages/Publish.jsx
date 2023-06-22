@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputForm from "../components/InputForm";
 import DropFileInput from "../components/DropFileInput";
+import useAuthUserAction from "../hooks/useAuthUserAction";
 
 
 const Publish = ({token}) => {
@@ -16,9 +17,6 @@ const Publish = ({token}) => {
     city: "",
     price: "",
   })
-  const [ loading, setLoading ] = useState(false);
-  const [ error, setError ] = useState(null);
-  const [ success, setSuccess ] = useState(false)
 
   function handleChange (event) {
     const { id, value } = event.target;
@@ -46,58 +44,10 @@ const Publish = ({token}) => {
       price: "",
     })
   }
- 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setLoading(true)
-    setSuccess(false);
-    setError(null)
-    try {
-      const formData = new FormData();
-      const datasForm = Object.entries(publishForm);
 
-      datasForm.forEach(([key, value])=> {
-        if(key === "picture") {
-          if(Array.isArray(value)) {
-            value.forEach(file => {
-              formData.append("picture", file)
-            })
-          } else {
-            formData.append("picture", value)
-          }
-        } else {
-          formData.append(key, value);
-        }       
-      })
-    
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/offer/publish`, {
-        method: "POST",
-      // not setting the content-type header with fetch
-        headers: {
-          "Authorization": `Bearer ${token}` 
-        },
-        body: formData
-      })
-      const data = await response.json();  
+  // custom hook
+  const { loading, error, success, handleSubmit } = useAuthUserAction(token);
 
-      if(response.status === 201) {
-        // reset the form if success
-        resetForm();
-        setSuccess("Votre article a été publié avec succes")
-      } 
-      if (response.status === 400 && data.message === "Price must be greater than 0 and not exceed 500") {
-        setError("Le prix doit etre un nombre compris entre 0 à 500 euros")
-      } else if (response.status === 400 && data.message === "Only images files are allowed") {
-        setError("Seul les fichiers de type Images sont acceptes")
-      } else if (response.status === 400) {
-        setError("Veuillez remplir tous les champs :)")
-      }      
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return ( 
   
@@ -106,7 +56,7 @@ const Publish = ({token}) => {
     
       <form 
         className="container flex flex-col"
-        onSubmit={handleSubmit}
+        onSubmit={(event) => {handleSubmit(event, publishForm, resetForm)}}
       >  
         <DropFileInput 
           pictures={publishForm.picture}
