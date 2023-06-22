@@ -1,10 +1,11 @@
 import { useState } from "react";
+import useAuthUserAction from "../hooks/useAuthUserAction";
 
-const Profile = ({ user }) => {
+const Profile = ({ token, user }) => {
   const avatarPic = user?.account?.avatar?.secure_url;
 
-  const [profile, setProfile] = useState({
-    userName: user.account.username,
+  const [ profile, setProfile ] = useState({
+    username: user.account.username,
     avatar: avatarPic ? avatarPic : "/icons/account.svg",
     newsletter: user.newsletter,
   });
@@ -28,28 +29,41 @@ const Profile = ({ user }) => {
     });
   }
 
+  // custom hook
+  const { 
+    loading, 
+    success,
+    error,
+    handleUpdateUser, 
+    handleEditPassword,
+    pwLoading, 
+    pwValidate,
+    pwError
+  } = useAuthUserAction(token);
+
 
   return (
     <fieldset className="container h-full mt-[8.5rem] mb-16">
-      <legend className="text-4xl mx-auto mb-12">Profile presque pret ^_^</legend>
+      <legend className="text-4xl mx-auto mb-12">Détail du Profile</legend>
       <div
         className="flex flex-col gap-4 justify-center items-center w-[85%] h-full sm:max-w-[600px] mx-auto"
-        //   onSubmit={submitSignup}
       >
-        <form className="profile w-full flex-1 flex gap-3">
-          
+        <form 
+          className="profile w-full flex-1 flex gap-3"
+          onSubmit={(event) => {handleUpdateUser(event, profile)}}
+        >   
           <div className="flex-1">
             {profile.avatar instanceof File ? (
                 <img
-                    className="w-52 aspect square my-4"
-                    src={URL.createObjectURL(profile.avatar)}
-                    alt="avatar"
+                  className="w-52 aspect square my-4"
+                  src={URL.createObjectURL(profile.avatar)}
+                  alt="avatar"
                 />
             ) : (
                 <img
-                    className="w-52 aspect square my-4"
-                    src={avatarPic ? avatarPic : "/icons/account.svg"}
-                    alt="avatar"
+                  className="w-52 aspect square my-4"
+                  src={avatarPic ? avatarPic : "/icons/account.svg"}
+                  alt="avatar"
                 />
             )}
             <input id="avatar" type="file" onChange={handleChange} />
@@ -60,10 +74,10 @@ const Profile = ({ user }) => {
                 Nom utilisateur
               <input
                 className="inputField border-2 border-zinc-300"
-                id="userName"
+                id="username"
                 type="text"
                 onChange={handleChange}
-                value={profile.userName}
+                value={profile.username}
                 placeholder="Nom d'utilisateur"
               />
             </label>
@@ -87,38 +101,59 @@ const Profile = ({ user }) => {
             </label>
         
             <button className="bg-[#017b86] text-xl text-slate-50 min-h-[40px] mt-2">
-                Mise a jour Profile
+              {loading ? "En cours..." : "Mise a jour Profile"}   
             </button>
+            <div className="h-12">
+              {success  &&
+                <p className="mt-6 text-teal-500 text-center">{success}</p>
+              } 
+              {error  &&
+                <p className="mt-6 text-red-500 text-center">{error}</p>
+              }   
+            </div>
           </div>
         </form>
 
         <div className="w-full h-0.5 my-4 bg-slate-200"></div>
 
-        <form className="flex flex-col justify-end gap-4 max-w-[300px]">
-            <label className="" htmlFor="oldpassword">
+        <form 
+          className="flex flex-col justify-end gap-4 max-w-[300px]"
+          onSubmit={(event) => {handleEditPassword(event, credential, setCredential)}}
+        >
+            <label className="" htmlFor="oldPassword">
               Ancien Mot de passe
               <input
                 className="inputField border-2 border-zinc-300"
                 id="oldPassword"
                 type="password"
                 onChange={handlePassword}
+                value={credential.oldPassword}
                 placeholder="Mot de passe actuel"
               />
             </label>
 
-            <label className="" htmlFor="password">
+            <label className="" htmlFor="newPassword">
               Nouveau mot de passe
               <input
                 className="inputField border-2 border-zinc-300"
                 id="newPassword"
                 type="password"
                 onChange={handlePassword}
+                value={credential.newPassword}
                 placeholder="Nouveau Mot de passe"
               />
             </label>
           <button className="bg-[#017b86] text-xl text-slate-50 min-h-[40px] mt-4">
-              Mise a jour mot de passe
+            {pwLoading ? "En cours..." : "Mise a jour Mot de passe"}  
           </button>
+          <div className="h-12">
+            {pwValidate  &&
+              <p className="mt-6 text-teal-500 text-center">{pwValidate}</p>
+            } 
+            {pwError  &&
+              <p className="mt-6 text-red-500 text-center">{pwError}</p>
+            }   
+          </div>
         </form>     
       </div>
     </fieldset>

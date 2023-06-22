@@ -13,7 +13,6 @@ const Payment = ({ token, user }) => {
   const elements = useElements();
  
   async function handleSubmit(event) {
-
     event.preventDefault();
     try {
       setPaymentStatus(1);
